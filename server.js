@@ -5,12 +5,66 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var articleOne = {
+    title: "Article One | Shubham Nagar",
+    heading: "Article One",
+    date: "Feb 18, 2018",
+    content: `
+        <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis vehicula risus in vulputate. Integer bibendum tellus in pretium pellentesque. Phasellus imperdiet quam tortor, sit amet viverra eros consectetur eget. Quisque consectetur et urna ut efficitur. Curabitur finibus magna ut nunc iaculis ultricies quis sed libero. Mauris lobortis ac sem id elementum. Praesent finibus neque nec dapibus dictum. Nullam luctus quis nibh et mollis. In hac habitasse platea dictumst. Donec luctus lacus vel risus lacinia gravida.
+        </p>
+        <p>
+            Nullam venenatis sit amet nibh at rutrum. Nam elementum ac nisi vulputate lobortis. Curabitur ut ultrices ligula, non tempor lectus. Praesent mollis nibh nisi, in posuere tortor pharetra sit amet. Quisque at faucibus velit. Pellentesque consectetur tempus est in elementum. Duis ultricies ante id sapien pulvinar, vitae posuere leo dictum.
+        </p>
+        <p>
+            In pulvinar sollicitudin felis, at vestibulum erat accumsan vel. Nam elit orci, maximus faucibus urna quis, dapibus consectetur libero. Mauris sodales tempus dui ac scelerisque. Maecenas sed gravida dui. Donec ornare odio velit, non maximus mauris bibendum ac. Proin sit amet condimentum ligula, vitae posuere massa. Etiam vestibulum urna dui, eu iaculis felis placerat vitae. Vivamus et tempus magna, ac dictum tellus.
+        </p>`
+}
+
+function createTemplate(data) {
+
+    var title = data.title;
+    var date = data.date;
+    var heading = data.heading;
+    var content = data.content;
+
+    var htmlTemplate = `
+    <html>
+        <head>
+            <title>
+                ${title}
+            </title>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <link href="/ui/style.css" rel="stylesheet" />
+        </head>
+        <body>
+            <div class="container">
+                <div>
+                    <a href="/">Home</a>
+                </div>
+                <hr>
+                <h3>
+                    ${heading}
+                </h3>
+                <div>
+                    ${date}
+                </div>
+                <div>
+                    ${content}
+                </div>
+            </div>
+        </body>
+    </html>
+    `;
+    return htmlTemplate;
+}
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
 app.get('/article-one', function(req, res) {
-    res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
+    res.send(createTemplate(articleOne));
 });
 
 app.get('/article-two', function(req, res) {
