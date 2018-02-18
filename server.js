@@ -5,21 +5,53 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleOne = {
-    title: "Article One | Shubham Nagar",
-    heading: "Article One",
-    date: "Feb 18, 2018",
-    content: `
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis vehicula risus in vulputate. Integer bibendum tellus in pretium pellentesque. Phasellus imperdiet quam tortor, sit amet viverra eros consectetur eget. Quisque consectetur et urna ut efficitur. Curabitur finibus magna ut nunc iaculis ultricies quis sed libero. Mauris lobortis ac sem id elementum. Praesent finibus neque nec dapibus dictum. Nullam luctus quis nibh et mollis. In hac habitasse platea dictumst. Donec luctus lacus vel risus lacinia gravida.
-        </p>
-        <p>
-            Nullam venenatis sit amet nibh at rutrum. Nam elementum ac nisi vulputate lobortis. Curabitur ut ultrices ligula, non tempor lectus. Praesent mollis nibh nisi, in posuere tortor pharetra sit amet. Quisque at faucibus velit. Pellentesque consectetur tempus est in elementum. Duis ultricies ante id sapien pulvinar, vitae posuere leo dictum.
-        </p>
-        <p>
-            In pulvinar sollicitudin felis, at vestibulum erat accumsan vel. Nam elit orci, maximus faucibus urna quis, dapibus consectetur libero. Mauris sodales tempus dui ac scelerisque. Maecenas sed gravida dui. Donec ornare odio velit, non maximus mauris bibendum ac. Proin sit amet condimentum ligula, vitae posuere massa. Etiam vestibulum urna dui, eu iaculis felis placerat vitae. Vivamus et tempus magna, ac dictum tellus.
-        </p>`
-}
+var articles = {
+    'article-one': {
+        title: "Article One | Shubham Nagar",
+        heading: "Article One",
+        date: "Feb 18, 2018",
+        content: `
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis vehicula risus in vulputate. Integer bibendum tellus in pretium pellentesque. Phasellus imperdiet quam tortor, sit amet viverra eros consectetur eget. Quisque consectetur et urna ut efficitur. Curabitur finibus magna ut nunc iaculis ultricies quis sed libero. Mauris lobortis ac sem id elementum. Praesent finibus neque nec dapibus dictum. Nullam luctus quis nibh et mollis. In hac habitasse platea dictumst. Donec luctus lacus vel risus lacinia gravida.
+            </p>
+            <p>
+                Nullam venenatis sit amet nibh at rutrum. Nam elementum ac nisi vulputate lobortis. Curabitur ut ultrices ligula, non tempor lectus. Praesent mollis nibh nisi, in posuere tortor pharetra sit amet. Quisque at faucibus velit. Pellentesque consectetur tempus est in elementum. Duis ultricies ante id sapien pulvinar, vitae posuere leo dictum.
+            </p>
+            <p>
+                In pulvinar sollicitudin felis, at vestibulum erat accumsan vel. Nam elit orci, maximus faucibus urna quis, dapibus consectetur libero. Mauris sodales tempus dui ac scelerisque. Maecenas sed gravida dui. Donec ornare odio velit, non maximus mauris bibendum ac. Proin sit amet condimentum ligula, vitae posuere massa. Etiam vestibulum urna dui, eu iaculis felis placerat vitae. Vivamus et tempus magna, ac dictum tellus.
+            </p>`
+    },
+    'article-two': {
+        title: "Article Two | Shubham Nagar",
+        heading: "Article Two",
+        date: "Feb 18, 2018",
+        content: `
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis vehicula risus in vulputate. Integer bibendum tellus in pretium pellentesque. Phasellus imperdiet quam tortor, sit amet viverra eros consectetur eget. Quisque consectetur et urna ut efficitur. Curabitur finibus magna ut nunc iaculis ultricies quis sed libero. Mauris lobortis ac sem id elementum. Praesent finibus neque nec dapibus dictum. Nullam luctus quis nibh et mollis. In hac habitasse platea dictumst. Donec luctus lacus vel risus lacinia gravida.
+            </p>
+            <p>
+                Nullam venenatis sit amet nibh at rutrum. Nam elementum ac nisi vulputate lobortis. Curabitur ut ultrices ligula, non tempor lectus. Praesent mollis nibh nisi, in posuere tortor pharetra sit amet. Quisque at faucibus velit. Pellentesque consectetur tempus est in elementum. Duis ultricies ante id sapien pulvinar, vitae posuere leo dictum.
+            </p>
+            <p>
+                In pulvinar sollicitudin felis, at vestibulum erat accumsan vel. Nam elit orci, maximus faucibus urna quis, dapibus consectetur libero. Mauris sodales tempus dui ac scelerisque. Maecenas sed gravida dui. Donec ornare odio velit, non maximus mauris bibendum ac. Proin sit amet condimentum ligula, vitae posuere massa. Etiam vestibulum urna dui, eu iaculis felis placerat vitae. Vivamus et tempus magna, ac dictum tellus.
+            </p>`
+    },
+    'article-three': {
+        title: "Article Three | Shubham Nagar",
+        heading: "Article Three",
+        date: "Feb 18, 2018",
+        content: `
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis vehicula risus in vulputate. Integer bibendum tellus in pretium pellentesque. Phasellus imperdiet quam tortor, sit amet viverra eros consectetur eget. Quisque consectetur et urna ut efficitur. Curabitur finibus magna ut nunc iaculis ultricies quis sed libero. Mauris lobortis ac sem id elementum. Praesent finibus neque nec dapibus dictum. Nullam luctus quis nibh et mollis. In hac habitasse platea dictumst. Donec luctus lacus vel risus lacinia gravida.
+            </p>
+            <p>
+                Nullam venenatis sit amet nibh at rutrum. Nam elementum ac nisi vulputate lobortis. Curabitur ut ultrices ligula, non tempor lectus. Praesent mollis nibh nisi, in posuere tortor pharetra sit amet. Quisque at faucibus velit. Pellentesque consectetur tempus est in elementum. Duis ultricies ante id sapien pulvinar, vitae posuere leo dictum.
+            </p>
+            <p>
+                In pulvinar sollicitudin felis, at vestibulum erat accumsan vel. Nam elit orci, maximus faucibus urna quis, dapibus consectetur libero. Mauris sodales tempus dui ac scelerisque. Maecenas sed gravida dui. Donec ornare odio velit, non maximus mauris bibendum ac. Proin sit amet condimentum ligula, vitae posuere massa. Etiam vestibulum urna dui, eu iaculis felis placerat vitae. Vivamus et tempus magna, ac dictum tellus.
+            </p>`
+    }
+};
 
 function createTemplate(data) {
 
@@ -63,16 +95,11 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/article-one', function(req, res) {
-    res.send(createTemplate(articleOne));
-});
-
-app.get('/article-two', function(req, res) {
-    res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
-});
-
-app.get('/article-three', function(req, res) {
-    res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
+app.get('/:articleName', function(req, res) {
+    // articleName == article-one
+    // articles[articleName] == {} content object for article-number
+    var articleName = res.params.articleName;
+    res.send(createTemplate(articles[articleName]));
 });
 
 app.get('/ui/style.css', function (req, res) {
